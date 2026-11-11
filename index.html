@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>حساب الكريدي · BENAADI PEINTURE</title>
+<style>
+  :root{
+    --teal:#0f766e; --teal2:#149b8f; --teal3:#14b8a6;
+    --ink:#0f172a; --muted:#64748b; --bg:#eceff1; --card:#ffffff;
+    --line:#e3e8e8; --gold:#b45309; --good:#0f766e; --bad:#b91c1c;
+    --shadow:0 1px 2px rgba(15,23,42,.06), 0 8px 24px -12px rgba(15,23,42,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"Segoe UI","Noto Kufi Arabic","Noto Naskh Arabic",Tahoma,system-ui,-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); font-size:15px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .num{font-variant-numeric:tabular-nums; font-feature-settings:"tnum"; direction:ltr; display:inline-block}
+
+  #lock{
+    position:fixed; inset:0; z-index:50; display:flex; align-items:center; justify-content:center;
+    padding:24px; background:radial-gradient(120% 90% at 50% 0%, #12706a 0%, #0b4f4a 55%, #07332f 100%);
+  }
+  .lock-card{
+    width:100%; max-width:380px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16);
+    border-radius:22px; padding:30px 24px 26px; text-align:center; backdrop-filter:blur(10px);
+    box-shadow:0 30px 60px -30px rgba(0,0,0,.7);
+  }
+  .mono{
+    width:64px;height:64px;margin:0 auto 16px;border-radius:18px;
+    background:linear-gradient(145deg,#2dd4bf,#0f766e); display:flex;align-items:center;justify-content:center;
+    font-weight:800; font-size:22px; color:#fff; letter-spacing:.5px;
+    box-shadow:0 12px 26px -12px rgba(45,212,191,.9);
+  }
+  .lock-brand{color:#a7f3d0; font-size:12px; letter-spacing:3px; font-weight:700; margin-bottom:6px}
+  .lock-title{color:#fff; font-size:20px; font-weight:800; margin:0 0 6px}
+  .lock-sub{color:rgba(226,255,250,.72); font-size:13px; margin:0 0 22px}
+  .pin{
+    width:100%; padding:14px 16px; border-radius:14px; border:1px solid rgba(255,255,255,.22);
+    background:rgba(0,0,0,.22); color:#fff; font-size:22px; text-align:center; letter-spacing:10px;
+    outline:none; font-variant-numeric:tabular-nums;
+  }
+  .pin::placeholder{letter-spacing:2px; font-size:14px; color:rgba(226,255,250,.5)}
+  .pin:focus{border-color:#2dd4bf; box-shadow:0 0 0 4px rgba(45,212,191,.18)}
+  .btn{
+    width:100%; margin-top:12px; padding:14px 18px; border:0; border-radius:14px; cursor:pointer;
+    background:linear-gradient(145deg,#2dd4bf,#0f766e); color:#03211e; font-weight:800; font-size:15px; font-family:inherit;
+    box-shadow:0 14px 28px -14px rgba(45,212,191,.9); transition:transform .12s ease, filter .12s ease;
+  }
+  .btn:active{transform:translateY(1px) scale(.995)}
+  .btn[disabled]{opacity:.6; cursor:progress}
+  .err{color:#fecaca; font-size:13px; margin-top:12px; min-height:20px}
+  .lock-foot{color:rgba(226,255,250,.45); font-size:11px; margin-top:20px; letter-spacing:.4px}
+  .shake{animation:shake .35s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+
+  #app{display:none; max-width:860px; margin:0 auto; padding:0 0 40px}
+  #app.on{display:block; animation:fade .35s ease}
+  @keyframes fade{from{opacity:0; transform:translateY(6px)}to{opacity:1; transform:none}}
+
+  header.top{
+    position:sticky; top:0; z-index:20;
+    background:linear-gradient(135deg,#0f766e 0%,#0b5d57 60%,#083f3b 100%);
+    color:#fff; padding:16px 18px 18px; border-radius:0 0 20px 20px;
+    box-shadow:0 10px 30px -18px rgba(8,63,59,.9);
+  }
+  .top-row{display:flex; align-items:flex-start; justify-content:space-between; gap:10px}
+  .brandmark{display:flex; align-items:center; gap:10px}
+  .brandmark .m{
+    width:38px;height:38px;border-radius:11px;background:linear-gradient(145deg,#2dd4bf,#0f766e);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#04241f;
+  }
+  .brandname{font-size:13px; letter-spacing:2.4px; font-weight:800; color:#d9fffa}
+  .brandsub{font-size:11px; color:rgba(226,255,250,.6); letter-spacing:.3px}
+  .chip{
+    background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.2);
+    padding:6px 11px; border-radius:999px; font-size:11px; font-weight:700; white-space:nowrap; color:#eafffd;
+  }
+  .page-title{margin:16px 0 2px; font-size:21px; font-weight:800; letter-spacing:.2px}
+  .page-sub{font-size:12.5px; color:rgba(226,255,250,.75)}
+
+  .wrap{padding:0 14px}
+  section{margin-top:16px}
+  .sec-head{display:flex; align-items:center; gap:8px; margin:0 4px 8px}
+  .sec-head h2{font-size:14px; margin:0; font-weight:800; color:#0b3b38}
+  .sec-head .dash{flex:1; height:1px; background:linear-gradient(90deg,var(--line),transparent)}
+  .sec-head .count{font-size:11px; color:var(--muted); background:#fff; border:1px solid var(--line); padding:1px 8px; border-radius:999px}
+
+  .card{background:var(--card); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); overflow:hidden}
+
+  .kpis{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  .kpi{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:13px 14px; box-shadow:var(--shadow)}
+  .kpi .k{font-size:11.5px; color:var(--muted); font-weight:700; letter-spacing:.2px}
+  .kpi .v{font-size:21px; font-weight:800; margin-top:3px; letter-spacing:-.3px}
+  .kpi .s{font-size:11px; margin-top:2px; color:var(--muted)}
+  .kpi.hero{grid-column:1 / -1; background:linear-gradient(135deg,#0f766e,#0b5d57); border:0; color:#fff}
+  .kpi.hero .k{color:rgba(226,255,250,.8)}
+  .kpi.hero .v{font-size:29px}
+  .kpi.hero .s{color:rgba(226,255,250,.7)}
+  .pos{color:var(--good)} .neg{color:var(--bad)}
+
+  .status{display:flex; align-items:center; gap:12px; padding:14px 16px}
+  .status .ico{width:38px;height:38px;border-radius:12px;background:#fef3c7;color:#92400e;display:flex;align-items:center;justify-content:center;font-size:18px;flex:none}
+  .status .t{font-weight:800; font-size:14px}
+  .status .p{font-size:12px; color:var(--muted)}
+
+  .tbl-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch}
+  table{width:100%; border-collapse:collapse; font-size:13px}
+  thead th{
+    background:#f7fafa; color:#33514e; font-size:11px; font-weight:800; letter-spacing:.2px;
+    padding:9px 10px; text-align:right; white-space:nowrap; border-bottom:1px solid var(--line);
+  }
+  tbody td{padding:9px 10px; border-bottom:1px solid #f1f4f4; vertical-align:middle}
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr:nth-child(even){background:#fbfdfd}
+  td.name{font-weight:700; color:#14332f; white-space:normal; min-width:120px}
+  td.n{text-align:left; font-variant-numeric:tabular-nums; white-space:nowrap; font-weight:700}
+  td.nt{color:#475569; font-size:12px; white-space:normal; min-width:150px}
+  tfoot td{padding:10px; font-weight:800; background:#f0f7f6; color:#0b3b38; border-top:1px solid var(--line)}
+
+  .note{display:flex; gap:9px; padding:11px 14px; border-bottom:1px solid #f1f4f4; font-size:12.5px; color:#334155}
+  .note:last-child{border-bottom:0}
+  .note .b{color:#b45309; font-weight:800; flex:none}
+
+  .foot{margin-top:22px; text-align:center; color:var(--muted); font-size:11.5px; line-height:1.9; padding:0 16px}
+  .foot b{color:#0b3b38; letter-spacing:1.5px; font-size:12px}
+  .actions{display:flex; gap:10px; margin-top:16px}
+  .actions button{
+    flex:1; padding:12px; border-radius:13px; border:1px solid var(--line); background:#fff;
+    font-family:inherit; font-size:13px; font-weight:800; color:#0b3b38; box-shadow:var(--shadow); cursor:pointer;
+  }
+  @media (min-width:640px){
+    .kpis{grid-template-columns:repeat(4,1fr)}
+    .kpi.hero{grid-column:span 2}
+  }
+  @media print{
+    body{background:#fff}
+    header.top{position:static}
+    .actions,#lock{display:none !important}
+    .card,.kpi{box-shadow:none}
+    section{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<div id="lock">
+  <div class="lock-card" id="lockCard">
+    <div class="mono">BP</div>
+    <div class="lock-brand">BENAADI PEINTURE</div>
+    <h1 class="lock-title">حساب الكريدي</h1>
+    <p class="lock-sub">صفحة محمية · أدخل رمز الدخول للاطلاع على الأرقام</p>
+    <input id="pin" class="pin" type="password" inputmode="numeric" autocomplete="off" placeholder="رمز الدخول">
+    <button id="go" class="btn" type="button">دخول</button>
+    <div class="err" id="err"></div>
+    <div class="lock-foot">BENAADI PEINTURE · حساب داخلي</div>
+  </div>
+</div>
+
+<div id="app">
+  <header class="top">
+    <div class="top-row">
+      <div class="brandmark">
+        <div class="m">BP</div>
+        <div>
+          <div class="brandname">BENAADI PEINTURE</div>
+          <div class="brandsub">محفظة الكريدي · الحسابات المستحقة</div>
+        </div>
+      </div>
+      <div class="chip" id="chipDate">—</div>
+    </div>
+    <h1 class="page-title">حساب الكريدي</h1>
+    <div class="page-sub">ما هو مستحق لي عند الزبناء وما هو مستحق عليّ عند الموردين</div>
+  </header>
+
+  <div class="wrap">
+    <section>
+      <div class="kpis" id="kpis"></div>
+    </section>
+
+    <section>
+      <div class="card">
+        <div class="status">
+          <div class="ico" id="stIco">!</div>
+          <div>
+            <div class="t" id="stT">—</div>
+            <div class="p" id="stP">—</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <h2>الكريدي المستحق لي عند الزبناء</h2>
+        <div class="dash"></div>
+        <div class="count" id="cntRecv">—</div>
+      </div>
+      <div class="card">
+        <div class="tbl-scroll">
+          <table id="tRecv">
+            <thead><tr><th>الزبون</th><th>التاريخ</th><th>المبلغ</th><th>التفاصيل</th></tr></thead>
+            <tbody></tbody>
+            <tfoot></tfoot>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <h2>المستحق عليّ عند الموردين</h2>
+        <div class="dash"></div>
+        <div class="count" id="cntPay">—</div>
+      </div>
+      <div class="card">
+        <div class="tbl-scroll">
+          <table id="tPay">
+            <thead><tr><th>المورد</th><th>التاريخ</th><th>المبلغ</th><th>التفاصيل</th></tr></thead>
+            <tbody></tbody>
+            <tfoot></tfoot>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <h2>سلع معلّقة عند الموردين (ما توصلتش)</h2>
+        <div class="dash"></div>
+        <div class="count" id="cntGoods">—</div>
+      </div>
+      <div class="card" id="goods"></div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <h2>آخر ما تصفّى</h2>
+        <div class="dash"></div>
+      </div>
+      <div class="card">
+        <div class="tbl-scroll">
+          <table id="tSettled">
+            <thead><tr><th>التاريخ</th><th>الزبون / المورد</th><th>المبلغ المسدد</th><th>ملاحظة</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <h2>ملاحظات للمراجعة</h2>
+        <div class="dash"></div>
+      </div>
+      <div class="card" id="notes"></div>
+    </section>
+
+    <div class="actions">
+      <button type="button" onclick="window.print()">طباعة / PDF</button>
+    </div>
+
+    <div class="foot">
+      <b>BENAADI PEINTURE</b><br>
+      حساب الكريدي · تحديث <span id="upd">—</span><br>
+      المبالغ بالدرهم · صفحة داخلية محمية
+    </div>
+  </div>
+</div>
+
+<script>
+const SALT_B64 = "7XXKpO/xtpHH7yGTt/zxwg==";
+const IV_B64 = "gQhNb+6gP7I+MT0f";
+const ITER = 200000;
+const PAYLOAD = "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";
+
+const b64d = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const fnum = n => {
+  if (n === null || n === undefined) return "—";
+  const r = Math.round(n * 100) / 100;
+  const s = Number.isInteger(r) ? String(r) : r.toFixed(2).replace(/0$/,"");
+  return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+async function unlock(pin){
+  const enc = new TextEncoder();
+  const base = await crypto.subtle.importKey("raw", enc.encode(pin), "PBKDF2", false, ["deriveKey"]);
+  const key = await crypto.subtle.deriveKey(
+    {name:"PBKDF2", salt:b64d(SALT_B64), iterations:ITER, hash:"SHA-256"},
+    base, {name:"AES-GCM", length:256}, false, ["decrypt"]
+  );
+  const buf = b64d(PAYLOAD);
+  const ct = buf.slice(0, buf.length - 16);
+  const tag = buf.slice(buf.length - 16);
+  const full = new Uint8Array(ct.length + 16);
+  full.set(ct, 0); full.set(tag, ct.length);
+  const pt = await crypto.subtle.decrypt({name:"AES-GCM", iv:b64d(IV_B64), tagLength:128}, key, full);
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+
+function el(tag, cls, txt){
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (txt !== undefined) e.textContent = txt;
+  return e;
+}
+
+function render(d){
+  document.getElementById("chipDate").textContent = d.period;
+  document.getElementById("upd").textContent = d.updated;
+
+  const kpis = document.getElementById("kpis");
+  d.kpis.forEach((k, i) => {
+    const c = el("div", "kpi" + (i === 0 ? " hero" : ""));
+    c.appendChild(el("div", "k", k.k));
+    const v = el("div", "v");
+    v.innerHTML = '<span class="num">' + fnum(k.v) + "</span>";
+    c.appendChild(v);
+    if (k.s) c.appendChild(el("div", "s", k.s));
+    kpis.appendChild(c);
+  });
+
+  document.getElementById("stIco").textContent = d.status.icon;
+  document.getElementById("stT").textContent = d.status.t;
+  document.getElementById("stP").textContent = d.status.p;
+
+  const fill = (id, rows, totalLabel, total, cntId) => {
+    const t = document.getElementById(id);
+    const tb = t.querySelector("tbody");
+    rows.forEach(r => {
+      const tr = el("tr");
+      tr.appendChild(el("td", "name", r.name));
+      tr.appendChild(el("td", "num", r.date || "—"));
+      const m = el("td", "n"); m.innerHTML = '<span class="num">' + fnum(r.amount) + "</span>";
+      tr.appendChild(m);
+      tr.appendChild(el("td", "nt", r.note || ""));
+      tb.appendChild(tr);
+    });
+    const tf = t.querySelector("tfoot");
+    if (tf) {
+      const tr = el("tr");
+      const c1 = el("td", "", totalLabel); c1.colSpan = 2; tr.appendChild(c1);
+      const c2 = el("td", "n"); c2.innerHTML = '<span class="num">' + fnum(total) + "</span>"; tr.appendChild(c2);
+      tr.appendChild(el("td", "", "درهم"));
+      tf.appendChild(tr);
+    }
+    document.getElementById(cntId).textContent = rows.length + " سطر";
+  };
+
+  fill("tRecv", d.recv, "المجموع المستحق لي", d.recvTotal, "cntRecv");
+  fill("tPay", d.pay, "المجموع المستحق عليّ", d.payTotal, "cntPay");
+
+  const goods = document.getElementById("goods");
+  d.goods.forEach(g => {
+    const n = el("div", "note");
+    n.appendChild(el("span", "b", "•"));
+    n.appendChild(el("span", "", g));
+    goods.appendChild(n);
+  });
+  document.getElementById("cntGoods").textContent = d.goods.length + " سطر";
+
+  const st = document.querySelector("#tSettled tbody");
+  d.settled.forEach(s => {
+    const tr = el("tr");
+    tr.appendChild(el("td", "num", s.date));
+    tr.appendChild(el("td", "name", s.name));
+    const m = el("td", "n"); m.innerHTML = '<span class="num">' + (s.amount ? fnum(s.amount) : "—") + "</span>";
+    tr.appendChild(m);
+    tr.appendChild(el("td", "nt", s.note || ""));
+    st.appendChild(tr);
+  });
+
+  const notes = document.getElementById("notes");
+  d.notes.forEach(t => {
+    const n = el("div", "note");
+    n.appendChild(el("span", "b", "!"));
+    n.appendChild(el("span", "", t));
+    notes.appendChild(n);
+  });
+}
+
+async function tryUnlock(){
+  const pin = document.getElementById("pin").value.trim();
+  if (!pin) return;
+  const btn = document.getElementById("go");
+  const err = document.getElementById("err");
+  btn.disabled = true; err.textContent = "";
+  try {
+    const d = await unlock(pin);
+    render(d);
+    document.getElementById("lock").style.display = "none";
+    document.getElementById("app").classList.add("on");
+    try { sessionStorage.setItem("cr_pin", pin); } catch(e) {}
+  } catch (e) {
+    err.textContent = "رمز غير صحيح";
+    document.getElementById("lockCard").classList.add("shake");
+    setTimeout(() => document.getElementById("lockCard").classList.remove("shake"), 400);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+document.getElementById("go").addEventListener("click", tryUnlock);
+document.getElementById("pin").addEventListener("keydown", e => { if (e.key === "Enter") tryUnlock(); });
+(async () => {
+  try {
+    const saved = sessionStorage.getItem("cr_pin");
+    if (saved) { document.getElementById("pin").value = saved; await tryUnlock(); }
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>
