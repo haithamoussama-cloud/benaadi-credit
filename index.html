@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>كريدي الموردين · BENAADI PEINTURE</title>
+<title>أرصدة الموردين · BENAADI PEINTURE</title>
 <style>
   :root{
     --teal:#0f766e; --teal2:#149b8f; --teal3:#14b8a6;
@@ -155,12 +155,12 @@
   <div class="lock-card" id="lockCard">
     <div class="mono">BP</div>
     <div class="lock-brand">BENAADI PEINTURE</div>
-    <h1 class="lock-title">كريدي الموردين</h1>
+    <h1 class="lock-title">أرصدة الموردين</h1>
     <p class="lock-sub">صفحة محمية · أدخل رمز الدخول للاطلاع على الأرقام</p>
     <input id="pin" class="pin" type="password" inputmode="numeric" autocomplete="off" placeholder="رمز الدخول">
     <button id="go" class="btn" type="button">دخول</button>
     <div class="err" id="err"></div>
-    <div class="lock-foot">BENAADI PEINTURE · حساب داخلي</div>
+    <div class="lock-foot">BENAADI PEINTURE · حساب داخلي خاص</div>
   </div>
 </div>
 
@@ -171,13 +171,13 @@
         <div class="m">BP</div>
         <div>
           <div class="brandname">BENAADI PEINTURE</div>
-          <div class="brandsub">أرصدة الموردين · الأفانس والباقي</div>
+          <div class="brandsub">أرصدة الموردين · الدفعات المقدمة والمتبقي</div>
         </div>
       </div>
       <div class="chip" id="chipDate">—</div>
     </div>
-    <h1 class="page-title">كريدي الموردين</h1>
-    <div class="page-sub">إجمالي حساب كل مورد · الأفانس المدفوع · والباقي عليه</div>
+    <h1 class="page-title">أرصدة الموردين</h1>
+    <div class="page-sub">إجمالي حساب كل مورد · الدفعة المقدمة · والمبلغ المتبقي</div>
   </header>
 
   <div class="wrap">
@@ -199,14 +199,14 @@
 
     <section>
       <div class="sec-head">
-        <h2>أرصدة الموردين — الإجمالي · الأفانس · الباقي</h2>
+        <h2>أرصدة الموردين — الإجمالي · الدفعات المقدمة · المتبقي</h2>
         <div class="dash"></div>
         <div class="count" id="cntSup">—</div>
       </div>
       <div class="card">
         <div class="tbl-scroll">
           <table id="tSup">
-            <thead><tr><th>المورد</th><th>الإجمالي</th><th>الأفانس</th><th>الباقي عليه</th></tr></thead>
+            <thead><tr><th>المورد</th><th>الإجمالي</th><th>الدفعات المقدمة</th><th>المتبقي</th></tr></thead>
             <tbody></tbody>
             <tfoot></tfoot>
           </table>
@@ -233,7 +233,7 @@
 
     <section>
       <div class="sec-head">
-        <h2>سلع معلّقة عند الموردين (ما توصلتش)</h2>
+        <h2>سلع معلّقة عند الموردين (لم تُستلم بعد)</h2>
         <div class="dash"></div>
         <div class="count" id="cntGoods">—</div>
       </div>
@@ -242,7 +242,7 @@
 
     <section>
       <div class="sec-head">
-        <h2>آخر ما تصفّى مع الموردين</h2>
+        <h2>آخر ما تمت تسويته مع الموردين</h2>
         <div class="dash"></div>
       </div>
       <div class="card">
@@ -269,17 +269,17 @@
 
     <div class="foot">
       <b>BENAADI PEINTURE</b><br>
-      كريدي الموردين · تحديث <span id="upd">—</span><br>
+      أرصدة الموردين · آخر تحديث <span id="upd">—</span><br>
       المبالغ بالدرهم · صفحة داخلية محمية
     </div>
   </div>
 </div>
 
 <script>
-const SALT_B64 = "+IwSsNlqavM5IAkVe/8tPA==";
-const IV_B64 = "0Rmpg3wnDs9E2JW6";
+const SALT_B64 = "aelJPW2iuT0yGhR9CzWRCw==";
+const IV_B64 = "Dx0oJYIgYR68G0VE";
 const ITER = 200000;
-const PAYLOAD = "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";
+const PAYLOAD = "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";
 
 const b64d = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
 const fnum = n => {
@@ -355,7 +355,7 @@ function render(d){
       tr.appendChild(el("td", "", "درهم"));
       tf.appendChild(tr);
     }
-    document.getElementById(cntId).textContent = rows.length + " سطر";
+    document.getElementById(cntId).textContent = "عدد البنود: " + rows.length;
   };
 
   fill("tPay", d.pay, "المجموع المستحق عليّ", d.payTotal, "cntPay");
@@ -381,7 +381,7 @@ function render(d){
     str.appendChild(td);
   });
   sft.appendChild(str);
-  document.getElementById("cntSup").textContent = d.sup.length + " مورد";
+  document.getElementById("cntSup").textContent = "عدد الموردين: " + d.sup.length;
 
   const goods = document.getElementById("goods");
   d.goods.forEach(g => {
@@ -390,7 +390,7 @@ function render(d){
     n.appendChild(el("span", "", g));
     goods.appendChild(n);
   });
-  document.getElementById("cntGoods").textContent = d.goods.length + " سطر";
+  document.getElementById("cntGoods").textContent = "عدد البنود: " + d.goods.length;
 
   const st = document.querySelector("#tSettled tbody");
   d.settled.forEach(s => {
